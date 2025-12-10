@@ -1,0 +1,37 @@
+{
+	"schemaVersion": 1,
+	"id": "civil-war",
+	"version": "${version}",
+	"name": "Civil War",
+	"description": "A lightweight Fabric mod to force natural hostilities between Undead and Illager factions.",
+	"authors": [
+		"ImpureCrumpet"
+	],
+	"contact": {
+		"homepage": "https://github.com/ImpureCrumpet/mc-civil-war",
+		"sources": "https://github.com/ImpureCrumpet/mc-civil-war"
+	},
+	"license": "MIT",
+	"icon": "assets/civil-war/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"ic.civilwar.CivilWar"
+		],
+		"client": [
+			"ic.civilwar.CivilWarClient"
+		]
+	},
+	"mixins": [
+		"civil-war.mixins.json",
+		{
+			"config": "civil-war.client.mixins.json",
+			"environment": "client"
+		}
+	],
+	"depends": {
+		"fabricloader": ">=0.18.2",
+		"minecraft": ">=1.21.7",
+		"java": ">=21"
+	}
+}
