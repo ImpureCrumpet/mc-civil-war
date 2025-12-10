@@ -5,6 +5,7 @@ import net.fabricmc.api.ClientModInitializer;
 public class CivilWarClient implements ClientModInitializer {
 	@Override
 	public void onInitializeClient() {
-		// This entrypoint is suitable for setting up client-specific logic, such as rendering.
+		// Client-side initialization - currently unused
+		// Reserved for future client-specific features (e.g., rendering, client-side events)
 	}
 }

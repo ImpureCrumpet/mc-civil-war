@@ -23,11 +23,7 @@
 		]
 	},
 	"mixins": [
-		"civil-war.mixins.json",
-		{
-			"config": "civil-war.client.mixins.json",
-			"environment": "client"
-		}
+		"civil-war.mixins.json"
 	],
 	"depends": {
 		"fabricloader": ">=0.18.2",
