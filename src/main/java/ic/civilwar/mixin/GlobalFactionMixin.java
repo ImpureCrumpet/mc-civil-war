@@ -18,8 +18,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
  * Applies only to hostile entities and uses EntityTypeTags checks to stay future-proof.
  * 
  * This mixin adds faction-based targeting goals:
- * - Undead mobs (tagged with SENSITIVE_TO_SMITE) will target Illagers (RAIDERS)
- * - Illagers will target Undead mobs
+ * - Undead mobs (tagged with SENSITIVE_TO_SMITE) will target Illagers (RAIDERS and ILLAGER tags)
+ * - Illagers (RAIDERS and ILLAGER tags) will target Undead mobs
  * Both use priority 2, matching player targeting priority.
  */
 @Mixin(MobEntity.class)
@@ -55,11 +55,15 @@ public abstract class GlobalFactionMixin {
             }
 
             boolean isUndead = self.getType().isIn(EntityTypeTags.SENSITIVE_TO_SMITE);
-            boolean isIllager = self.getType().isIn(EntityTypeTags.RAIDERS);
+            // Check for both RAIDERS and ILLAGER tags to ensure all illager types are covered, including Raiders
+            boolean isIllager = self.getType().isIn(EntityTypeTags.RAIDERS) 
+                || self.getType().isIn(EntityTypeTags.ILLAGER);
 
             // Undead target Illagers at priority 2 (same as players).
+            // Target both RAIDERS and ILLAGER tags to ensure comprehensive coverage, including Raiders
             if (isUndead) {
                 addFactionTarget(self, EntityTypeTags.RAIDERS);
+                addFactionTarget(self, EntityTypeTags.ILLAGER);
             }
 
             // Illagers target Undead at priority 2 (same as players).
