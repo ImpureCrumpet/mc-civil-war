@@ -31,4 +31,9 @@ bin/
 # macOS
 .DS_Store
 
+# Environment variables (contains sensitive tokens)
+.env
+.env.local
+.env.*.local
+
 ref/
