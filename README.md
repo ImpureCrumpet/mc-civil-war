@@ -1,4 +1,4 @@
-# Civil War Mod
+# Mob Civil War Mod
 
 A lightweight Fabric mod for Minecraft 1.21.x that introduces natural hostilities between Undead, Illager, and Arthropod factions, creating dynamic battlefield encounters throughout your world.
 
