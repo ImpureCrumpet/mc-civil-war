@@ -23,6 +23,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
  * - Illagers (RAIDERS and ILLAGER tags) will target Undead mobs and Arthropods (spiders/cave spiders)
  * - Arthropods (spiders/cave spiders, excluding silverfish/bees/endermites) will target Undead and Illagers
  * All use priority 2, matching player targeting priority.
+ * 
+ * Version-specific implementation for Minecraft 1.21.7+ using Predicate lambda.
  */
 @Mixin(MobEntity.class)
 public abstract class GlobalFactionMixin {
@@ -94,6 +96,7 @@ public abstract class GlobalFactionMixin {
 
     /**
      * Helper method to add a faction targeting goal to the entity's target selector.
+     * Uses Predicate lambda for Minecraft 1.21.7+ compatibility.
      * 
      * @param entity The hostile entity to add the goal to
      * @param targetTag The entity type tag to target
@@ -111,6 +114,7 @@ public abstract class GlobalFactionMixin {
     /**
      * Helper method to add a faction targeting goal with exclusions for problematic arthropods.
      * Excludes silverfish (swarm behavior), bees (neutral), and endermites (special mechanics).
+     * Uses Predicate lambda for Minecraft 1.21.7+ compatibility.
      * 
      * @param entity The hostile entity to add the goal to
      * @param targetTag The entity type tag to target (should be ARTHROPOD)
@@ -134,3 +138,4 @@ public abstract class GlobalFactionMixin {
         ));
     }
 }
+

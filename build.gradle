@@ -18,6 +18,33 @@ repositories {
 	// for more information about repositories.
 }
 
+// Determine which version-specific source directory to use based on Minecraft version
+def mcVersion = project.minecraft_version
+def useOldApi = false
+if (mcVersion == "1.21" || 
+    mcVersion == "1.21.1" || 
+    mcVersion == "1.21.2" || 
+    mcVersion == "1.21.3" || 
+    mcVersion == "1.21.4" || 
+    mcVersion == "1.21.5" || 
+    mcVersion == "1.21.6") {
+    useOldApi = true
+}
+
+// Add version-specific source directory to main source set
+sourceSets {
+    main {
+        java {
+            srcDirs = ['src/main/java']
+            if (useOldApi) {
+                srcDirs.add('src/main/java-1.21-1.21.6')
+            } else {
+                srcDirs.add('src/main/java-1.21.7+')
+            }
+        }
+    }
+}
+
 loom {
 	splitEnvironmentSourceSets()
 
