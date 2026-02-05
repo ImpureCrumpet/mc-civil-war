@@ -36,4 +36,7 @@ bin/
 .env.local
 .env.*.local
 
+# Cursor IDE (project-specific rules, keep local)
+.cursorrules
+
 ref/
