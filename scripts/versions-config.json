@@ -77,11 +77,11 @@
     "status": "pending"
   },
   "1.21.11": {
-    "yarn_mappings": "TBD",
-    "fabric_version": "TBD",
-    "loader_version": "0.18.2",
-    "loom_version": "1.14-SNAPSHOT",
-    "status": "pending"
+    "yarn_mappings": "1.21.11+build.4",
+    "fabric_version": "0.141.3+1.21.11",
+    "loader_version": "0.18.4",
+    "loom_version": "1.15-SNAPSHOT",
+    "status": "ready"
   }
 }
 
