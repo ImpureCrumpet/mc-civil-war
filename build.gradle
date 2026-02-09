@@ -31,18 +31,18 @@ if (mcVersion == "1.21" ||
     useOldApi = true
 }
 
-// Add version-specific source directory to main source set
+// Versioned source set for MC-version-specific code (e.g. GlobalFactionMixin).
+// Loom's splitEnvironmentSourceSets() overwrites main's java.srcDirs, so versioned
+// code would not be compiled if added to main. A separate source set is compiled
+// with main's classpath and included in the mod JAR via loom.mods.
 sourceSets {
-    main {
-        java {
-            srcDirs = ['src/main/java']
-            if (useOldApi) {
-                srcDirs.add('src/main/java-1.21-1.21.6')
-            } else {
-                srcDirs.add('src/main/java-1.21.7+')
-            }
-        }
-    }
+	versioned {
+		java {
+			srcDirs = [useOldApi ? 'src/main/java-1.21-1.21.6' : 'src/main/java-1.21.7+']
+		}
+		compileClasspath = sourceSets.main.output + sourceSets.main.compileClasspath
+		runtimeClasspath = sourceSets.main.output + sourceSets.main.runtimeClasspath
+	}
 }
 
 loom {
@@ -52,9 +52,9 @@ loom {
 		"civil-war" {
 			sourceSet sourceSets.main
 			sourceSet sourceSets.client
+			sourceSet sourceSets.versioned
 		}
 	}
-
 }
 
 dependencies {
@@ -91,6 +91,8 @@ java {
 }
 
 jar {
+	dependsOn tasks.named('versionedClasses')
+	from sourceSets.versioned.output
 	inputs.property "archivesName", project.base.archivesName
 
 	from("LICENSE") {
